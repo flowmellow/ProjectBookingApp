@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModels="clr-namespace:ProjectBookingApp.ViewModels"
+             x:Class="ProjectBookingApp.Views.BusinessRegistrationPage"
+             Title="BusinessRegistrationPage">
+
+    <ContentPage.BindingContext>
+        <viewModels:BusinessRegistrationViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView Background="AliceBlue">
+        <VerticalStackLayout Spacing='10' Margin="20, 20, 20, 0">
+
+            <Frame Padding="10, 2, 10, 2" BackgroundColor="LightBlue">
+                <HorizontalStackLayout>
+                    <Label Text="Business Name:" TextColor="Black" VerticalOptions="Center" WidthRequest="150"></Label>
+                    <Entry x:Name="entryBusinessName" VerticalOptions="Center" TextColor="Black" Text="{Binding BusinessName}">                        
+                    </Entry>
+                </HorizontalStackLayout>
+            </Frame>
+            <Frame Padding="10, 2, 10, 2" BackgroundColor="LightBlue">
+                <HorizontalStackLayout>
+                    <Label Text="Business Phone:" TextColor="Black" VerticalOptions="Center" WidthRequest="150"></Label>
+                    <Entry x:Name="entryBusinessPhone" VerticalOptions="Center" Text="{Binding PhoneNumber}" >
+                    </Entry>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Frame Padding="10, 2, 10, 2" BackgroundColor="LightBlue">
+                <HorizontalStackLayout>
+                    <Label Text="Business Type:" TextColor="Black" VerticalOptions="Center" WidthRequest="150"></Label>
+                    <Entry x:Name="entryBusinessType" VerticalOptions="Center" Text="{Binding BusinessType}">                       
+                    </Entry>
+                </HorizontalStackLayout>
+            </Frame>
+            <!--<Frame Padding="10, 2, 10, 2" BackgroundColor="LightBlue">
+                <HorizontalStackLayout>
+                    <Label Text="Business Type:" TextColor="Black" VerticalOptions="Center" WidthRequest="150" />
+                    <Picker ItemsSource="{Binding BusinessTypes}" SelectedItem="{Binding BusinessType}" />
+                </HorizontalStackLayout>
+            </Frame>-->
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">        
+                <Label Text="Hours of Operation:" TextColor="Black" TextDecorations="Underline" FontSize="Medium" VerticalOptions="Center" WidthRequest="300"></Label>
+                <TimePicker Time="{Binding HoursOfOperationStart}" Format="HH:mm" TextColor="Black" FontSize="Medium" Margin="10,0" BackgroundColor="LightGray"/>
+                <TimePicker Time="{Binding HoursOfOperationEnd}" Format="HH:mm" TextColor="Black" FontSize="Medium" Margin="10,0"  BackgroundColor="LightGray"/>
+            </StackLayout>
+
+            <StackLayout>
+                <Label Text="Select Days of Operation:" HorizontalOptions="Center" TextDecorations="Underline" TextColor="Black" FontSize="Medium" />
+                <StackLayout Orientation="Horizontal">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Monday" TextColor="Black" VerticalOptions="Center" WidthRequest="100" Grid.Row="0" Grid.Column="0" />
+                        <Switch IsToggled="{Binding IsMondaySelected}" OnColor="Green" ThumbColor="White" Grid.Row="0" Grid.Column="1" />
+                        <Label Text="Tuesday" TextColor="Black" VerticalOptions="Center" WidthRequest="100" Grid.Row="1" Grid.Column="0" />
+                        <Switch IsToggled="{Binding IsTuesdaySelected}" OnColor="Green" ThumbColor="White" Grid.Row="1" Grid.Column="1" />
+                        <Label Text="Wednesday" TextColor="Black" VerticalOptions="Center" WidthRequest="100" Grid.Row="2" Grid.Column="0" />
+                        <Switch IsToggled="{Binding IsWednesdaySelected}" OnColor="Green" ThumbColor="White" Grid.Row="2" Grid.Column="1" />
+                        <Label Text="Thursday" TextColor="Black" VerticalOptions="Center" WidthRequest="100" Grid.Row="3" Grid.Column="0" />
+                        <Switch IsToggled="{Binding IsThursdaySelected}" OnColor="Green" ThumbColor="White" Grid.Row="3" Grid.Column="1" />
+                    </Grid>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Label Text="Friday" TextColor="Black" VerticalOptions="Center" WidthRequest="100" Grid.Row="0" Grid.Column="0" />
+                        <Switch IsToggled="{Binding IsFridaySelected}" OnColor="Green" ThumbColor="White" Grid.Row="0" Grid.Column="1" />
+                        <Label Text="Saturday" TextColor="Black" VerticalOptions="Center" WidthRequest="100" Grid.Row="1" Grid.Column="0" />
+                        <Switch IsToggled="{Binding IsSaturdaySelected}" OnColor="Green" ThumbColor="White" Grid.Row="1" Grid.Column="1" />
+                        <Label Text="Sunday" TextColor="Black" VerticalOptions="Center" WidthRequest="100" Grid.Row="2" Grid.Column="0" />
+                        <Switch IsToggled="{Binding IsSundaySelected}" OnColor="Green" ThumbColor="White" Grid.Row="2" Grid.Column="1" />
+                    </Grid>
+                </StackLayout>
+            </StackLayout>
+            <Button x:Name="saveBtn"  Padding="5"  Text="Save" Command="{Binding SaveBusinessCommand}"></Button>
+            <Button x:Name="updateBtn" Padding="5" Text="Update" Command="{Binding UpdateBusinessCommand}"></Button>
+            <Button x:Name="cancelBtn" Padding="5" Text="Cancel" Command="{Binding CancelActionCommand}"></Button>
+            <Button x:Name="deleteBtn" Padding="5" Text="Delete" Command="{Binding DeleteBusinessCommand}"></Button>
+            <!-- Add Service Button -->
+            <Button x:Name="addServiceBtn" BackgroundColor="LightGreen" Padding="5" Text="+ Add Service" Command="{Binding ShowAddServiceFormCommand}" />
+
+            <!-- Add Service Form -->
+            <ContentView x:Name="addServiceForm" IsVisible="{Binding IsAddServiceFormVisible}">
+                <Frame Padding="10" BackgroundColor="LightGray" CornerRadius="5">
+                    <StackLayout Spacing="10">
+                        <Entry x:Name="entryServiceType" Placeholder="Service Type" Text="{Binding TypeOfService}" />
+                        <Entry x:Name="entryServicePrice" Placeholder="Price" Text="{Binding Price}" />                       
+                        <Button Text="Save" Command="{Binding SaveNewServiceCommand}" />
+                        <Button Text="Cancel" Command="{Binding CancelAddServiceCommand}" />
+                    </StackLayout>
+                </Frame>
+            </ContentView>
+
+            <!-- Services CollectionView -->
+            <Frame Padding="5" BorderColor="Black" BackgroundColor="LightBlue" CornerRadius="5">
+                <CollectionView ItemsSource="{Binding Services}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label Text="{Binding TypeOfService}" VerticalOptions="Center" WidthRequest="150" />
+                                <Label Text="{Binding Price}" VerticalOptions="Center" WidthRequest="150" />
+                                <Button Text="Edit" Command="{Binding Path=BindingContext.EditServiceCommand, Source={x:Reference Name=addServiceBtn}}" CommandParameter="{Binding .}" />
+                                <Button Text="Delete" Command="{Binding Path=BindingContext.DeleteServiceCommand, Source={x:Reference Name=addServiceBtn}}" CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
+
+           
+
+            <!-- Timeslots ListView -->
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="Start Time:" TextColor="Black" VerticalOptions="Center" WidthRequest="100" />
+                <TimePicker Time="{Binding TimeBlockStart}" Format="HH:mm" TextColor="Black" FontSize="Medium" Margin="10,0" BackgroundColor="LightGray"/>
+                <Label Text="End Time:" TextColor="Black" VerticalOptions="Center" WidthRequest="100" />
+                <TimePicker Time="{Binding TimeBlockEnd}" Format="HH:mm" TextColor="Black" FontSize="Medium" Margin="10,0" BackgroundColor="LightGray"/>
+                <Button x:Name="addTimeBlockBtn" Text="Add Time Block" Command="{Binding AddTimeBlockCommand}" />
+            </StackLayout>
+
+            <!-- Timeslots ListView -->
+            <Frame Margin="5,5,5,20" Padding="5" BorderColor="Black" BackgroundColor="White" CornerRadius="5">
+                <CollectionView ItemsSource="{Binding TimeBlocks}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Label TextColor="Black" Text="{Binding TimeBlockStart}" VerticalOptions="Center" WidthRequest="100" />
+                                <Label TextColor="black" Text=" - " VerticalOptions="Center" />
+                                <Label TextColor="black" Text="{Binding TimeBlockEnd}" VerticalOptions="Center" WidthRequest="100" />
+                                <Button Text="Delete Time Block" Command="{Binding Path=BindingContext.DeleteTimeBlockCommand, Source={x:Reference Name=addTimeBlockBtn}}" CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Frame>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

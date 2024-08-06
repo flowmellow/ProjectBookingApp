@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+             x:Class="ProjectBookingApp.Views.LoginPage"
+             xmlns:viewModels="clr-namespace:ProjectBookingApp.ViewModels">
+
+    <ContentPage.BindingContext>
+        <viewModels:LoginViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+        <Grid>
+            <StackLayout Margin="10">
+                <Image
+                    Source="calender.png"
+                    HeightRequest="120"            
+                    HorizontalOptions="Center"
+                    SemanticProperties.Description="calender"/>
+
+                <StackLayout Margin="0, 10, 0, 0">
+                    <Label HorizontalTextAlignment="Center" FontSize="32" Text="Welcome to TimeSync" />
+                    <Label Margin="0,5" HorizontalTextAlignment="Center" FontSize="16" Text="Sign in to continue or" />
+                    <Button x:Name="UserRegistrationButton" Background="Transparent" FontSize="16" Text="Register" TextColor="LightBlue" Command="{Binding UserRegistrationCommand}"/>
+                </StackLayout>
+
+                <StackLayout>
+                    <Label FontSize="16" Text="Username / Email" />
+                    <Grid Margin="0,5">
+                        <Frame Opacity="1" BackgroundColor="White" CornerRadius="10"/>
+                        <Entry TextColor="Black" BackgroundColor="Transparent"  PlaceholderColor="LightGray" Placeholder="Enter Username"
+                               Text="{Binding Email}"
+                                x:Name="loginEmailEntry"/>
+                    </Grid>
+                    <Label FontSize="16" Text="Password" />
+                    <Grid Margin="0,5">
+                        <Frame Opacity="1" BackgroundColor="White" CornerRadius="10"/>
+                        <Entry TextColor="Black" BackgroundColor="Transparent"  PlaceholderColor="LightGray" Placeholder="Enter Password" 
+                               Text="{Binding Password}"
+                               x:Name="loginPasswordEntry"
+                               IsPassword="True"/>
+                        
+                    </Grid>
+                </StackLayout>
+
+                <Button x:Name="LoginButton" Margin="0,15" Background="LightBlue" Text="Log in" 
+                TextColor="Black" Command="{Binding LogInCommand}"
+                   />
+
+
+            </StackLayout>
+
+        </Grid>
+    </ScrollView>
+
+</ContentPage>

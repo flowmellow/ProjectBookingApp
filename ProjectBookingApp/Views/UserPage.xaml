@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit" 
+             xmlns:viewModels="clr-namespace:ProjectBookingApp.ViewModels"
+             x:Class="ProjectBookingApp.Views.UserPage"
+             Title="User Page" >
+
+    <ContentPage.BindingContext>
+        <viewModels:UserViewModel />
+    </ContentPage.BindingContext>
+
+    <ScrollView Background="AliceBlue">
+        <VerticalStackLayout Spacing='10' Margin="20, 20, 20, 0">
+
+            <Frame Padding="10, 2, 10, 2" BackgroundColor="LightBlue">
+                <HorizontalStackLayout>
+                    <Label Text="First Name" TextColor="Black" VerticalOptions="Center" WidthRequest="100"></Label>
+                    <Entry x:Name="entryFirstName" VerticalOptions="Center" TextColor="Black" Text="{Binding FirstName}">
+                        <Entry.Behaviors>
+                            <toolkit:TextValidationBehavior
+                                x:Name="firstNameValidator"                            
+                                Flags="ValidateOnAttaching,ValidateOnValueChanged"
+                                MinimumLength="1"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                </HorizontalStackLayout>
+            </Frame>
+            <Frame Padding="10, 2, 10, 2" BackgroundColor="LightBlue">
+                <HorizontalStackLayout>
+                    <Label Text="Last Name" VerticalOptions="Center" WidthRequest="100"></Label>
+                    <Entry x:Name="entryLastName" VerticalOptions="Center" Text="{Binding LastName}">
+                        <Entry.Behaviors>
+                            <toolkit:TextValidationBehavior
+                                x:Name="lastNameValidator"                            
+                                Flags="ValidateOnAttaching,ValidateOnValueChanged"
+                                MinimumLength="1"/>
+                        </Entry.Behaviors>
+                    </Entry>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Frame Padding="10, 2, 10, 2" BackgroundColor="LightBlue">
+                <HorizontalStackLayout>
+                    <Label Text="Email" VerticalOptions="Center" WidthRequest="100"></Label>
+                    <Entry x:Name="entryEmail" VerticalOptions="Center" Text="{Binding Email}">
+                        <Entry.Behaviors>
+                            <toolkit:MultiValidationBehavior
+                        x:Name="emailValidator"
+                        Flags="ValidateOnAttaching,ValidateOnValueChanged">
+                                <toolkit:TextValidationBehavior                                                      
+                            Flags="ValidateOnAttaching,ValidateOnValueChanged"
+                            MinimumLength="1"
+                            toolkit:MultiValidationBehavior.Error="Email is required."
+                            />
+                                <toolkit:EmailValidationBehavior 
+                            Flags="ValidateOnAttaching,ValidateOnValueChanged"
+                            toolkit:MultiValidationBehavior.Error="Email format is invalid." />
+                            </toolkit:MultiValidationBehavior>
+                        </Entry.Behaviors>
+                    </Entry>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Frame Padding="10, 2, 10, 2" BackgroundColor="LightBlue">
+                <HorizontalStackLayout>
+                    <Label Text="Password" VerticalOptions="Center" WidthRequest="100"></Label>
+                    <Entry x:Name="entryPassword" VerticalOptions="Center" Text="{Binding Password}"></Entry>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Frame Padding="10, 2, 10, 2" BackgroundColor="LightBlue">
+                <HorizontalStackLayout>
+                    <Label Text="Phone" VerticalOptions="Center" WidthRequest="100"></Label>
+                    <Entry x:Name="entryPhone" VerticalOptions="Center" Text="{Binding Phone}"></Entry>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Frame Padding="10, 2, 10, 2" BackgroundColor="LightBlue">
+                <HorizontalStackLayout>
+                    <Label Text="Street Address" VerticalOptions="Center" WidthRequest="100"></Label>
+                    <Entry x:Name="entryStreetAddress" VerticalOptions="Center" Text="{Binding StreetAddress}"></Entry>
+                </HorizontalStackLayout>
+            </Frame>
+
+            <Frame Padding="10, 2, 10, 2" BackgroundColor="LightBlue">
+                <HorizontalStackLayout>
+                    <Label Text="City" VerticalOptions="Center" WidthRequest="100"></Label>
+                    <Entry x:Name="entryCity" VerticalOptions="Center" Text="{Binding City}"></Entry>
+                </HorizontalStackLayout>
+            </Frame>
+            <Frame Padding="10, 2, 10, 2" BackgroundColor="LightBlue">
+                <HorizontalStackLayout>
+                    <Label Text="State" VerticalOptions="Center" WidthRequest="100"></Label>
+                    <Entry x:Name="entryState" VerticalOptions="Center" Text="{Binding State}"></Entry>
+                </HorizontalStackLayout>
+            </Frame>
+            <Frame Padding="10, 2, 10, 2" BackgroundColor="LightBlue">
+                <HorizontalStackLayout>
+                    <Label Text="Zip Code" VerticalOptions="Center" WidthRequest="100"></Label>
+                    <Entry x:Name="entryZipCode" VerticalOptions="Center" Text="{Binding ZipCode}"></Entry>
+                </HorizontalStackLayout>
+            </Frame>
+            <Button x:Name="btnSave" Text="Save" Command="{Binding SaveUserCommand}"></Button>
+            <Button x:Name="btnUpdate" Text="Update" Command="{Binding UpdateUserCommand}"></Button>
+            <Button x:Name="btnCancel" Text="Cancel" Command="{Binding CancelActionCommand}"></Button>
+            <Button x:Name="btnDelete" Text="Delete" Command="{Binding DeleteUserCommand}"></Button>
+            
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

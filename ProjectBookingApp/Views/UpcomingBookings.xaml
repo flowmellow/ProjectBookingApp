@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:ProjectBookingApp.ViewModels"
+             x:Class="ProjectBookingApp.Views.UpcomingBookings"
+             Title="UpcomingBookings">
+    <ContentPage.BindingContext>
+        <viewModels:UpcomingBookingsViewModel />
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <VerticalStackLayout>
+            <!-- Notification Block -->
+            <CollectionView ItemsSource="{Binding Notifications}">
+                <CollectionView.EmptyView>
+                    <Label Text="No notifications at this time " HorizontalOptions="Center" VerticalOptions="Center" />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BorderColor="Black" CornerRadius="5" Padding="10" Margin="0, 0, 0, 20">
+                            <StackLayout>
+                                <Label Margin="15,15,15,15" Text="{Binding Message}" />
+                                <Button Margin="10" HorizontalOptions="Center" WidthRequest="200" Text="Accept" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UpcomingBookingsViewModel}}, Path=AcceptNotificationCommand}" CommandParameter="{Binding .}" />
+                                <Button Margin="10" HorizontalOptions="Center" WidthRequest="200" Text="Decline" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UpcomingBookingsViewModel}}, Path=DeclineNotificationCommand}" CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- User Appointments -->
+                <CollectionView Grid.Column="0" ItemsSource="{Binding UserAppointments}">
+                    <CollectionView.EmptyView>
+                        <Label Text="No user appointments at this time." HorizontalOptions="Center" VerticalOptions="Center" />
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Margin="20, 20, 20, 20">
+                                <Label Text="{Binding AppointmentDate, StringFormat='Date: {0:MM/dd/yyyy}'}" FontAttributes="Bold" />
+                                <Label Text="{Binding TimeBlock, StringFormat='Time: {0}'}" />
+                                <Label Text="{Binding ServiceName, StringFormat='Service: {0}'}" />
+                                <Label Text="{Binding BusinessName, StringFormat='Business: {0}'}" />
+                                <Button HorizontalOptions="Center" WidthRequest="100" Text="Cancel" Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:UpcomingBookingsViewModel}}, Path=CancelAppointmentCommand}" CommandParameter="{Binding .}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <!-- Business Appointments -->
+                <CollectionView Grid.Column="1" ItemsSource="{Binding BusinessAppointments}">
+                    <CollectionView.EmptyView>
+                        <Label Text="No business appointments at this time." HorizontalOptions="Center" VerticalOptions="Center" />
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <Label Text="{Binding AppointmentDate, StringFormat='Date: {0:MM/dd/yyyy}'}" />
+                                <Label Text="{Binding TimeBlock, StringFormat='Time: {0}'}" />
+                                <Label Text="{Binding ServiceName, StringFormat='Service: {0}'}" />
+                                <Label Text="{Binding BusinessName, StringFormat='Business: {0}'}" />
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+            <!-- Return Button -->
+            <Button Margin="15, 15, 15, 15" HorizontalOptions="Center" WidthRequest="500" Text="Return to Registration" Command="{Binding ReturnToRegistrationCommand}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

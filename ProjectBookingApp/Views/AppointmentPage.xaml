@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"  
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:viewModels="clr-namespace:ProjectBookingApp.ViewModels"
+             x:Class="ProjectBookingApp.Views.AppointmentPage"
+             Title="AppointmentPage">
+    <ContentPage.BindingContext>
+        <viewModels:AppointmentViewModel />
+    </ContentPage.BindingContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="3*" />
+        </Grid.ColumnDefinitions>
+        <VerticalStackLayout Grid.Column="0" Padding="10">
+            <DatePicker x:Name="datePicker"
+            Date="{Binding SelectedDate, Mode=TwoWay}"
+            VerticalOptions="Start" />
+        </VerticalStackLayout>
+
+        <VerticalStackLayout Grid.Column="1" Padding="10">
+            <CollectionView ItemsSource="{Binding AvailableTimeBlocks}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" Padding="5">
+                            <Label Margin="10" Text="{Binding TimeBlockStart}" />
+                            <Label Margin="10" Text=" - " />
+                            <Label Margin="10" Text="{Binding TimeBlockEnd}" />
+                            <Button Margin="10,0,0,5" Text="Book"
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:AppointmentViewModel}}, Path=BookAppointmentCommand}"
+                                CommandParameter="{Binding}" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <CheckBox IsChecked="{Binding IsWaitlistChecked}" />
+            <Label Text="Put me on the waitlist" />
+            <Button Text="Save to Waitlist" Command="{Binding SaveWaitlistCommand}" />
+            <Button Margin="10" x:Name="upcomingAppointmentBtn" Text="Upcoming Appointments" Command="{Binding UpcomingBookingsNavigationCommand}"></Button>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
