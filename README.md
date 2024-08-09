@@ -7,7 +7,7 @@ Features
 •	User Registration and Login: Secure user authentication and registration.
 •	Appointment Management: Create, view, and cancel appointments.
 •	Business Registration: Register businesses and manage services provided.
-•	Notifications: Notify users of available appointments and other updates.
+•	Notifications: Notify users of available appointments and other updates. 
 •	Data Persistence: Uses SQLite for local data storage.
 
 Project Structure
